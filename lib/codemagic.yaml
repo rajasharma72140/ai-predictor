@@ -1,0 +1,23 @@
+workflows:
+  android-debug:
+    name: Android APK
+    instance_type: mac_mini_m2
+
+    environment:
+      flutter: stable
+
+    scripts:
+      - name: Generate Android project
+        script: |
+          flutter create --platforms=android .
+
+      - name: Get Flutter packages
+        script: |
+          flutter pub get
+
+      - name: Build APK
+        script: |
+          flutter build apk --debug
+
+    artifacts:
+      - build/app/outputs/flutter-apk/*.apk
